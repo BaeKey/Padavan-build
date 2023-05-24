@@ -53,7 +53,9 @@ jobs:
         exit 1
         fi
         # 修改后台地址
-        sed -i 's/192\.168\.2/192.168.31/g' user/shared/defaults.h
+        # sed -i 's/192\.168\.2/192.168.31/g' user/shared/defaults.h
+        # 修改版本号
+        sed -i 's/FIRMWARE_BUILDS_REV=$(shell date +%Y%m%d 2>\/dev\/null)/FIRMWARE_BUILDS_REV=20230508/' versions.inc
         cp -f configs/templates/$TNAME.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
         ################################################################################################
@@ -69,10 +71,6 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config #删除配置项adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config #删除配置项adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config #删除配置项阿里DDNS
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_WIREGUARD/d' .config #删除配置项WIREGUARD
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSH/d' .config #删除配置项OPENSSH
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SFTP/d' .config #删除配置项SFTP
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_TCPDUMP/d' .config #删除配置项TCPDUMP
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
